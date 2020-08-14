@@ -1,6 +1,30 @@
+body {
+  background: grey;
+}
+
 h1 {
   margin: 50px;
   text-align: center;
+}
+
+.screenshot-wrapper {
+  position: fixed;
+  flex-direction: column;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  padding-top: 100px;
+  backdrop-filter: crimson;
+  background: rgb(0 0 0 / 89%);
+  display: none;
+}
+
+.screenshot-wrapper canvas {
+  margin-top: 50px;
 }
 
 section {
@@ -36,6 +60,7 @@ img {
   display: flex;
   flex-wrap: wrap;
   background: #1a1a17;
+  min-height: 80px;
 }
 
 .tier-rank {

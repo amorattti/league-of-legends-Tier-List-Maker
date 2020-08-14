@@ -4,19 +4,24 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="FaviconIcon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="node_modules/dragula/dist/dragula.css" type="text/css">
+    <link rel="stylesheet" href="./src/css/style.css">
     <title>Document</title>
   </head>
 
   <body>
     <article>
+      <button>Screenshot</button>
       <h1>League Of Legends Champions 2020 Tier List Maker</h1>
-      <section class="tier-container">
+      <section class="tier-container" id="capture">
         <div class="tier-row">
           <div class="tier-rank">
             <span>S</span>
           </div>
           <div class="tier-sort"></div>
-          <div class="tier-config">
+          <div data-html2canvas-ignore class="tier-config">
             <div class="btn settings">
               <i class="fa fa-cog" aria-hidden="true"></i>
             </div>
@@ -35,7 +40,7 @@
             <span>A</span>
           </div>
           <div class="tier-sort"></div>
-          <div class="tier-config">
+          <div data-html2canvas-ignore class="tier-config">
             <div class="btn settings">
               <i class="fa fa-cog" aria-hidden="true"></i>
             </div>
@@ -54,7 +59,7 @@
             <span>B</span>
           </div>
           <div class="tier-sort"></div>
-          <div class="tier-config">
+          <div data-html2canvas-ignore class="tier-config">
             <div class="btn settings">
               <i class="fa fa-cog" aria-hidden="true"></i>
             </div>
@@ -73,7 +78,7 @@
             <span>C</span>
           </div>
           <div class="tier-sort"></div>
-          <div class="tier-config">
+          <div data-html2canvas-ignore class="tier-config">
             <div class="btn settings">
               <i class="fa fa-cog" aria-hidden="true"></i>
             </div>
@@ -92,7 +97,7 @@
             <span>D</span>
           </div>
           <div class="tier-sort"></div>
-          <div class="tier-config">
+          <div data-html2canvas-ignore class="tier-config">
             <div class="btn settings">
               <i class="fa fa-cog" aria-hidden="true"></i>
             </div>
@@ -109,12 +114,9 @@
       </section>
       <section class="tier-champions-container">
       </section>
-
-      <button>Start</button>
     </article>
-
-    <div id="capture" style="padding: 10px; background: #f5da55">
-      <h4 style="color: #000; ">Hello world!</h4>
+    <div class="screenshot-wrapper">
+      <button>Download Image</button>
     </div>
   </body>
   <script src="./dist/main.js"></script>
