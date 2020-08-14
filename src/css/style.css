@@ -1,0 +1,103 @@
+h1 {
+  margin: 50px;
+  text-align: center;
+}
+
+section {
+  box-sizing: border-box;
+  max-width: 960px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+img {
+  cursor: pointer;
+}
+
+.tier-champions-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tier-container {
+  border: 1px solid;
+}
+
+.tier-row {
+  display: flex;
+  border-bottom: 2px solid;
+}
+
+.tier-row:nth-last-child(1) {
+  border-bottom: none;
+}
+
+.tier-sort {
+  display: flex;
+  flex-wrap: wrap;
+  background: #1a1a17;
+}
+
+.tier-rank {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1.2;
+}
+
+.tier-sort {
+  flex: 8
+}
+
+.tier-config {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  background: #000000;
+}
+
+.btn {
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.fa {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 35px;
+  color: #ffff;
+  padding-left: 5px;
+}
+
+.fa-chevron-up,
+.fa-chevron-down {
+  font-size: 20px;
+}
+
+.tier-row:nth-child(1) .tier-rank {
+  background: rgb(255, 127, 127);
+}
+
+.tier-row:nth-child(2) .tier-rank {
+  background: rgb(255, 191, 127);
+}
+
+.tier-row:nth-child(3) .tier-rank {
+  background: rgb(255, 223, 127);
+}
+
+.tier-row:nth-child(4) .tier-rank {
+  background: rgb(255, 255, 127);
+}
+
+.tier-row:nth-child(5) .tier-rank {
+  background: rgb(191, 255, 127);
+}
