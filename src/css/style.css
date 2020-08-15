@@ -8,9 +8,20 @@ h1 {
 }
 
 .screenshot-wrapper {
-  position: fixed;
+  display: flex;
   flex-direction: column;
   align-items: center;
+  padding-right: 8px;
+  background: #ffff;
+  height: 460px;
+  width: 810px;
+  position: relative;
+  overflow: auto;
+}
+
+.screenshot-container-wrapper {
+  justify-content: center;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -18,13 +29,12 @@ h1 {
   margin-right: auto;
   height: 100%;
   padding-top: 100px;
-  backdrop-filter: crimson;
   background: rgb(0 0 0 / 89%);
   display: none;
 }
 
 .screenshot-wrapper canvas {
-  margin-top: 50px;
+  transform: scale(0.8);
 }
 
 section {
@@ -92,6 +102,24 @@ img {
   align-items: center;
 }
 
+.btn-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.btn-download {
+  margin-top: 15px;
+  border: none;
+  background: #efefef;
+  padding: 10px 20px;
+  border-radius: 6px;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+}
+
 .fa {
   position: absolute;
   left: 0;
@@ -125,4 +153,15 @@ img {
 
 .tier-row:nth-child(5) .tier-rank {
   background: rgb(191, 255, 127);
+}
+
+
+/*css api*/
+
+.active {
+  display: flex;
+}
+
+.inactive {
+  display: none;
 }
