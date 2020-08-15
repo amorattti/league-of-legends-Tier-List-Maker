@@ -6,10 +6,10 @@ import ToggleClass from './ToggleClass';
 const container = document.querySelector('.tier-champions-container');
 const buttonSave = document.querySelector('.btn-show');
 const buttonClose = document.querySelector('.btn-close');
-const ScreenshotWrapperContainer = document.querySelector('.screenshot-container-wrapper');
-const ScreenshotWrapper = document.querySelector('.screenshot-wrapper');
+const screenshotWrapperContainer = document.querySelector('.screenshot-container-wrapper');
+const screenshotWrapper = document.querySelector('.screenshot-wrapper');
 
-const toggleClass = new ToggleClass(ScreenshotWrapperContainer)
+const toggleClass = new ToggleClass(screenshotWrapperContainer)
 
 async function getImages() {
   const fetchApi = await fetch('http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion.json');
@@ -28,8 +28,8 @@ async function getCanvas() {
     backgroundColor: null,
   });
 
-  ScreenshotWrapper.removeChild(ScreenshotWrapper.lastChild);
-  ScreenshotWrapper.appendChild(canvas);
+  screenshotWrapper.removeChild(screenshotWrapper.lastChild);
+  screenshotWrapper.appendChild(canvas);
   toggleClass.show();
 
 }
@@ -42,3 +42,11 @@ drake.containers.push(container);
 
 buttonSave.onclick = () => getCanvas();
 buttonClose.onclick = () => toggleClass.hide();
+screenshotWrapperContainer.onclick = event => {
+  event.stopPropagation();
+  toggleClass.hide();
+}
+
+screenshotWrapper.onclick = event => {
+  event.stopPropagation();
+}
