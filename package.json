@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/tobiasz18/TierMaker#readme",
   "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   },

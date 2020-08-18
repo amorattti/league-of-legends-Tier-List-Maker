@@ -4,12 +4,12 @@ export default class ToggleClass {
   }
 
   show() {
-    this.element.classList.add("active");
-    this.element.classList.remove("inactive");
+    this.element.classList.add('active');
+    this.element.classList.remove('inactive');
   }
 
   hide() {
-    this.element.classList.remove("active");
-    this.element.classList.add("inactive");
+    this.element.classList.remove('active');
+    this.element.classList.add('inactive');
   }
 }
