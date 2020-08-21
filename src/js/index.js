@@ -1,3 +1,4 @@
+/* eslint-disable */
 import dragula from 'dragula';
 import html2canvas from 'html2canvas';
 import ToggleClass from './ToggleClass';
@@ -5,16 +6,20 @@ import ToggleClass from './ToggleClass';
 const container = document.querySelector('.tier-champions-container');
 const buttonSave = document.querySelector('.btn-show');
 const buttonClose = document.querySelector('.btn-close');
-const screenshotWrapperContainer = document.querySelector('.screenshot-container-wrapper');
+const screenshotWrapperContainer = document.querySelector(
+  '.screenshot-container-wrapper'
+);
 const screenshotWrapper = document.querySelector('.screenshot-wrapper');
 
 const toggleClass = new ToggleClass(screenshotWrapperContainer);
 
 async function getImages() {
-  const fetchApi = await fetch('http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion.json');
+  const fetchApi = await fetch(
+    'http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion.json'
+  );
   const fetchJson = await fetchApi.json();
-  // eslint-disable-next-line array-callback-return
-  Object.keys(fetchJson.data).map((champion) => {
+
+  Object.keys(fetchJson.data).forEach((champion) => {
     const myImage = new Image(80, 80);
     myImage.src = `http://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion}.png`;
     container.appendChild(myImage);
@@ -56,3 +61,17 @@ screenshotWrapperContainer.onclick = (event) => {
 screenshotWrapper.onclick = (event) => {
   event.stopPropagation();
 };
+
+document.querySelectorAll('.tier-row').forEach((item, index) => {
+  document.querySelectorAll('.toUp')[index].onclick = () => {
+    if (item.previousElementSibling) {
+      item.after(item.previousElementSibling);
+    }
+  };
+
+  document.querySelectorAll('.toDown')[index].onclick = () => {
+    if (item.nextElementSibling) {
+      item.before(item.nextElementSibling);
+    }
+  };
+});
