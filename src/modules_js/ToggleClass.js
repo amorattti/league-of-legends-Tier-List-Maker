@@ -1,6 +1,6 @@
 export default class ToggleClass {
   constructor(element) {
-    this.element = element;
+    this.element = document.querySelector(element);
   }
 
   show() {

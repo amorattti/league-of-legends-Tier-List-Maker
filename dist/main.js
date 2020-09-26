@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -246,27 +246,135 @@ eval("var g;\n\n// This works in non-strict mode\ng = (function() {\n\treturn th
 
 /***/ }),
 
-/***/ "./src/js/ToggleClass.js":
-/*!*******************************!*\
-  !*** ./src/js/ToggleClass.js ***!
-  \*******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return ToggleClass; });\nclass ToggleClass {\r\n  constructor(element) {\r\n    this.element = element;\r\n  }\r\n\r\n  show() {\r\n    this.element.classList.add('active');\r\n    this.element.classList.remove('inactive');\r\n  }\r\n\r\n  hide() {\r\n    this.element.classList.remove('active');\r\n    this.element.classList.add('inactive');\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/js/ToggleClass.js?");
-
-/***/ }),
-
-/***/ "./src/js/index.js":
-/*!*************************!*\
-  !*** ./src/js/index.js ***!
-  \*************************/
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var dragula__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dragula */ \"./node_modules/dragula/dragula.js\");\n/* harmony import */ var dragula__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dragula__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! html2canvas */ \"./node_modules/html2canvas/dist/html2canvas.js\");\n/* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(html2canvas__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _ToggleClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ToggleClass */ \"./src/js/ToggleClass.js\");\n/* eslint-disable */\r\n\r\n\r\n\r\n\r\nconst container = document.querySelector('.tier-champions-container');\r\nconst buttonSave = document.querySelector('.btn-show');\r\nconst buttonClose = document.querySelector('.btn-close');\r\nconst screenshotWrapperContainer = document.querySelector(\r\n  '.screenshot-container-wrapper'\r\n);\r\nconst screenshotWrapper = document.querySelector('.screenshot-wrapper');\r\n\r\nconst toggleClass = new _ToggleClass__WEBPACK_IMPORTED_MODULE_2__[\"default\"](screenshotWrapperContainer);\r\n\r\nasync function getImages(value) {\r\n  const fetchApi = await fetch(\r\n    'http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion.json'\r\n  );\r\n  const fetchJson = await fetchApi.json();\r\n\r\n  container.innerHTML = '';\r\n\r\n  function removeDuplicates(arr) {\r\n    var counts = arr.reduce(function (counts, item) {\r\n      counts[item] = (counts[item] || 0) + 1;\r\n      return counts;\r\n    }, {});\r\n\r\n    return Object.keys(counts).reduce(function (arr, item) {\r\n      if (counts[item] === 1) {\r\n        arr.push(item);\r\n      }\r\n      return arr;\r\n    }, []);\r\n  }\r\n\r\n  const newArr = removeDuplicates(prevDuplicates(fetchJson.data, value));\r\n\r\n  newArr.forEach((item) => {\r\n    const myImage = new Image(80, 80);\r\n    myImage.src = `http://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${item}.png`;\r\n    myImage.id = item;\r\n    myImage.className = 'icon_champ';\r\n    container.appendChild(myImage);\r\n  });\r\n}\r\n\r\nconst prevDuplicates = (data, value) => {\r\n  const arr = [];\r\n  Object.values(data).forEach((item) => {\r\n    if (item.tags.includes(value)) {\r\n      return arr.push(item.id);\r\n    } else if (value === 'All') {\r\n      return arr.push(item.id);\r\n    }\r\n  });\r\n\r\n  document.querySelectorAll('.tier-sort').forEach((item) => {\r\n    Object.values(item.children).map((item) => arr.push(item.id));\r\n  });\r\n\r\n  document.querySelectorAll('.icon_champ').forEach((item) => arr.push(item.id));\r\n\r\n  return arr;\r\n};\r\n\r\nasync function getCanvas() {\r\n  const canvas = await html2canvas__WEBPACK_IMPORTED_MODULE_1___default()(document.querySelector('.tier-container'), {\r\n    useCORS: true,\r\n    removeContainer: true,\r\n    backgroundColor: null,\r\n  });\r\n  canvas.toDataURL('image/jpeg');\r\n  screenshotWrapper.removeChild(screenshotWrapper.lastChild);\r\n  screenshotWrapper.appendChild(canvas);\r\n  toggleClass.show();\r\n}\r\n\r\nconst download = () => {\r\n  const link = document.createElement('a');\r\n  link.download = 'filename.png';\r\n  link.href = document.querySelector('canvas').toDataURL();\r\n  link.click();\r\n};\r\n\r\ndocument.querySelector('.btn-download').onclick = () => download();\r\n\r\nconst drake = dragula__WEBPACK_IMPORTED_MODULE_0___default()([].slice.call(document.querySelectorAll('.tier-sort')));\r\ndrake.containers.push(container);\r\n\r\nbuttonSave.onclick = () => getCanvas();\r\nbuttonClose.onclick = () => toggleClass.hide();\r\nscreenshotWrapperContainer.onclick = (event) => {\r\n  event.stopPropagation();\r\n  toggleClass.hide();\r\n};\r\n\r\nscreenshotWrapper.onclick = (event) => {\r\n  event.stopPropagation();\r\n};\r\n\r\ndocument.querySelectorAll('.tier-row').forEach((item, index) => {\r\n  document.querySelectorAll('.toUp')[index].onclick = () => {\r\n    if (item.previousElementSibling) {\r\n      item.after(item.previousElementSibling);\r\n    }\r\n  };\r\n\r\n  document.querySelectorAll('.toDown')[index].onclick = () => {\r\n    if (item.nextElementSibling) {\r\n      item.before(item.nextElementSibling);\r\n    }\r\n  };\r\n});\r\n\r\nconst run = () => {\r\n  getImages('All');\r\n  document.querySelector('select').onchange = (e) => getImages(e.target.value);\r\n};\r\n\r\nrun();\r\n\r\n/*\r\nLink do Api docs\r\n\r\n//https://developer.riotgames.com/docs/lol\r\n\r\n*/\r\n\n\n//# sourceURL=webpack:///./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_js_Arrows__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules_js/Arrows */ \"./src/modules_js/Arrows.js\");\n/* harmony import */ var _modules_js_ArrowsUI__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules_js/ArrowsUI */ \"./src/modules_js/ArrowsUI.js\");\n/* harmony import */ var _modules_js_ClicableElementsUI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules_js/ClicableElementsUI */ \"./src/modules_js/ClicableElementsUI.js\");\n/* harmony import */ var _modules_js_ClicableElements__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules_js/ClicableElements */ \"./src/modules_js/ClicableElements.js\");\n/* harmony import */ var _modules_js_DragAndDrop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules_js/DragAndDrop */ \"./src/modules_js/DragAndDrop.js\");\n\r\n\r\n\r\n\r\n\r\n\r\nconst dragAndDrop = new _modules_js_DragAndDrop__WEBPACK_IMPORTED_MODULE_4__[\"Dnd\"]('.tier-champions-container', '.tier-sort');\r\nconst changeArrow = new _modules_js_Arrows__WEBPACK_IMPORTED_MODULE_0__[\"ChangePositionTools\"]();\r\nconst arrowUI = new _modules_js_ArrowsUI__WEBPACK_IMPORTED_MODULE_1__[\"ChangeRowPositionUI\"]('.tier-row', '.move_up', '.move_down');\r\nconst clickableElementsUI = new _modules_js_ClicableElementsUI__WEBPACK_IMPORTED_MODULE_2__[\"ClickableElementsUI\"]([\r\n  ['.btn-show', 'click'],\r\n  ['.btn-close', 'click'],\r\n  ['.btn-download', 'click'],\r\n  ['.screenshot-container-wrapper', 'click'],\r\n  ['.screenshot-wrapper', 'click'],\r\n  ['#category', 'change'],\r\n]);\r\nconst clickableElements = new _modules_js_ClicableElements__WEBPACK_IMPORTED_MODULE_3__[\"ClickableElements\"]();\r\n\r\ndragAndDrop.dnd();\r\n\r\n// it refers to the up arrows and down arrow\r\narrowUI.subscribe((selectorName, item) => {\r\n  changeArrow.changeTool(selectorName, item);\r\n});\r\n\r\nclickableElementsUI.subscribe((selector, event) => {\r\n  clickableElements.changeButton(selector, event);\r\n});\r\n\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/modules_js/Arrows.js":
+/*!**********************************!*\
+  !*** ./src/modules_js/Arrows.js ***!
+  \**********************************/
+/*! exports provided: ChangePositionTools */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ChangePositionTools\", function() { return ChangePositionTools; });\n/* eslint-disable */\r\nclass ChangePositionTools {\r\n  moveUp(item) {\r\n    if (item.previousElementSibling) {\r\n      item.after(item.previousElementSibling);\r\n    }\r\n  }\r\n\r\n  moveDown(item) {\r\n    if (item.nextElementSibling) {\r\n      item.before(item.nextElementSibling);\r\n    }\r\n  }\r\n\r\n  changeTool(selectorName, item) {\r\n    switch (selectorName) {\r\n      case '.move_up':\r\n        return this.moveUp(item);\r\n      case '.move_down':\r\n        return this.moveDown(item);\r\n      default:\r\n        return;\r\n    }\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/modules_js/Arrows.js?");
+
+/***/ }),
+
+/***/ "./src/modules_js/ArrowsUI.js":
+/*!************************************!*\
+  !*** ./src/modules_js/ArrowsUI.js ***!
+  \************************************/
+/*! exports provided: ChangeRowPositionUI */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ChangeRowPositionUI\", function() { return ChangeRowPositionUI; });\nclass ChangeRowPositionUI {\r\n  constructor(row, previusElement, nextEmenent) {\r\n    this.rows = document.querySelectorAll(row);\r\n    this.moveUp = document.querySelectorAll(previusElement);\r\n    this.moveDown = document.querySelectorAll(nextEmenent);\r\n    this.subscribed = [];\r\n    this.attachDomElements();\r\n  }\r\n\r\n  attachDomElements() {\r\n    this.rows.forEach((item, index) => {\r\n      this.attachListening(this.moveUp, '.move_up', item, index);\r\n      this.attachListening(this.moveDown, '.move_down', item, index);\r\n    });\r\n  }\r\n\r\n  attachListening(btn, selector, item, index) {\r\n    btn[index].addEventListener('click', () => {\r\n      this.subscribed.forEach((callback) => callback(selector, item));\r\n    });\r\n  }\r\n\r\n  subscribe(subscribe) {\r\n    this.subscribed.push(subscribe);\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/modules_js/ArrowsUI.js?");
+
+/***/ }),
+
+/***/ "./src/modules_js/ClicableElements.js":
+/*!********************************************!*\
+  !*** ./src/modules_js/ClicableElements.js ***!
+  \********************************************/
+/*! exports provided: ClickableElements */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ClickableElements\", function() { return ClickableElements; });\n/* harmony import */ var _DrawingCanvas2Html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DrawingCanvas2Html */ \"./src/modules_js/DrawingCanvas2Html.js\");\n/* harmony import */ var _fetch_images__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fetch.images */ \"./src/modules_js/fetch.images.js\");\n/* harmony import */ var _ImagesUI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ImagesUI */ \"./src/modules_js/ImagesUI.js\");\n/* harmony import */ var _ToggleClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ToggleClass */ \"./src/modules_js/ToggleClass.js\");\n/* eslint-disable class-methods-use-this */\r\n\r\n\r\n\r\n\r\n\r\nconst URL = 'http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion.json';\r\n\r\nclass ClickableElements {\r\n  constructor() {\r\n    this.canvasToHtmlClass = new _DrawingCanvas2Html__WEBPACK_IMPORTED_MODULE_0__[\"DrawingCanvasUI\"](\r\n      '.tier-container',\r\n      '.screenshot-wrapper',\r\n      '.screenshot-container-wrapper',\r\n    );\r\n    this.toggleClass = new _ToggleClass__WEBPACK_IMPORTED_MODULE_3__[\"default\"]('.screenshot-container-wrapper');\r\n    this.setCategory(null);\r\n  }\r\n\r\n  drawCanvasToHtml() {\r\n    this.canvasToHtmlClass.drawCanvas();\r\n  }\r\n\r\n  hideWrapper() {\r\n    this.toggleClass.hide();\r\n  }\r\n\r\n  hideWrapperContainer(event) {\r\n    event.stopPropagation();\r\n    this.toggleClass.hide();\r\n  }\r\n\r\n  screenshotWrapper(event) {\r\n    event.stopPropagation();\r\n  }\r\n\r\n  download() {\r\n    const link = document.createElement('a');\r\n    link.download = 'filename.png';\r\n    link.href = document.querySelector('canvas').toDataURL();\r\n    link.click();\r\n  }\r\n\r\n  async setCategory(event) {\r\n    let categoryName;\r\n    if (event) {\r\n      const { value } = event.target;\r\n      categoryName = value;\r\n    } else {\r\n      categoryName = 'All';\r\n    }\r\n    document.querySelector('.tier-champions-container').innerHTML = '';\r\n    const fetchedData = await Object(_fetch_images__WEBPACK_IMPORTED_MODULE_1__[\"fetchImages\"])(URL);\r\n    const getImages = new _ImagesUI__WEBPACK_IMPORTED_MODULE_2__[\"ImagesUI\"]('.tier-champions-container', fetchedData);\r\n    getImages.createImagesByCategory(categoryName);\r\n  }\r\n\r\n  changeButton(selector, event) {\r\n    switch (selector) {\r\n      case '.btn-show':\r\n        return this.drawCanvasToHtml();\r\n      case '.btn-close':\r\n        return this.hideWrapper();\r\n      case '.btn-download':\r\n        return this.download();\r\n      case '.screenshot-container-wrapper':\r\n        return this.hideWrapperContainer(event);\r\n      case '.screenshot-wrapper':\r\n        return this.screenshotWrapper(event);\r\n      case '#category':\r\n        return this.setCategory(event);\r\n      default:\r\n        return '';\r\n    }\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/modules_js/ClicableElements.js?");
+
+/***/ }),
+
+/***/ "./src/modules_js/ClicableElementsUI.js":
+/*!**********************************************!*\
+  !*** ./src/modules_js/ClicableElementsUI.js ***!
+  \**********************************************/
+/*! exports provided: ClickableElementsUI */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ClickableElementsUI\", function() { return ClickableElementsUI; });\nclass ClickableElementsUI {\r\n  constructor(arrayOfButtons) {\r\n    this.buttons = arrayOfButtons;\r\n    this.subscribed = [];\r\n    this.createElements();\r\n  }\r\n\r\n  createElements() {\r\n    this.buttons.forEach(([selector, eventType]) => {\r\n      this.createElement(selector, eventType);\r\n    });\r\n  }\r\n\r\n  createElement(selector, eventType) {\r\n    const button = document.querySelector(selector);\r\n    button.addEventListener(eventType, (event) => {\r\n      this.subscribed.forEach((callback) => callback(selector, event));\r\n    });\r\n  }\r\n\r\n  subscribe(subscribe) {\r\n    this.subscribed.push(subscribe);\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/modules_js/ClicableElementsUI.js?");
+
+/***/ }),
+
+/***/ "./src/modules_js/DragAndDrop.js":
+/*!***************************************!*\
+  !*** ./src/modules_js/DragAndDrop.js ***!
+  \***************************************/
+/*! exports provided: Dnd */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Dnd\", function() { return Dnd; });\n/* harmony import */ var dragula__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dragula */ \"./node_modules/dragula/dragula.js\");\n/* harmony import */ var dragula__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dragula__WEBPACK_IMPORTED_MODULE_0__);\n\r\n\r\nclass Dnd {\r\n  constructor(mainContainer, rowContainers) {\r\n    this.mainContainer = document.querySelector(mainContainer);\r\n    this.rowContainers = document.querySelectorAll(rowContainers);\r\n  }\r\n\r\n  dnd() {\r\n    const drake = dragula__WEBPACK_IMPORTED_MODULE_0___default()([].slice.call(this.rowContainers));\r\n    drake.containers.push(this.mainContainer);\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/modules_js/DragAndDrop.js?");
+
+/***/ }),
+
+/***/ "./src/modules_js/DrawingCanvas2Html.js":
+/*!**********************************************!*\
+  !*** ./src/modules_js/DrawingCanvas2Html.js ***!
+  \**********************************************/
+/*! exports provided: DrawingCanvasUI */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"DrawingCanvasUI\", function() { return DrawingCanvasUI; });\n/* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! html2canvas */ \"./node_modules/html2canvas/dist/html2canvas.js\");\n/* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(html2canvas__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _ToggleClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ToggleClass */ \"./src/modules_js/ToggleClass.js\");\n\r\n\r\n\r\nclass DrawingCanvasUI {\r\n  constructor(container, screenshotWrapper, screenshotWrapperContainer) {\r\n    this.toggleCssClass = new _ToggleClass__WEBPACK_IMPORTED_MODULE_1__[\"default\"](screenshotWrapperContainer);\r\n    this.container = document.querySelector(container);\r\n    this.screenshotWrapper = document.querySelector(screenshotWrapper);\r\n  }\r\n\r\n  async drawCanvas() {\r\n    const canvas = await html2canvas__WEBPACK_IMPORTED_MODULE_0___default()(this.container, {\r\n      useCORS: true,\r\n      removeContainer: true,\r\n      backgroundColor: null,\r\n    });\r\n    canvas.toDataURL('image/jpeg');\r\n    this.screenshotWrapper.removeChild(this.screenshotWrapper.lastChild);\r\n    this.screenshotWrapper.appendChild(canvas);\r\n    this.toggleCssClass.show();\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/modules_js/DrawingCanvas2Html.js?");
+
+/***/ }),
+
+/***/ "./src/modules_js/GroupByCategory.js":
+/*!*******************************************!*\
+  !*** ./src/modules_js/GroupByCategory.js ***!
+  \*******************************************/
+/*! exports provided: GroupByCategory */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"GroupByCategory\", function() { return GroupByCategory; });\n/* eslint-disable */\r\nclass GroupByCategory {\r\n  constructor(fetchedData) {\r\n    this.data = fetchedData;\r\n  }\r\n\r\n  setUpByCategory(categoryName) {\r\n    const sortByCategoryData = this.sortByCategory(\r\n      this.data,\r\n      categoryName\r\n    );\r\n\t\tconst duplicatesFilter = this.prevDuplicates(sortByCategoryData);\r\n\t\tconsole.log(duplicatesFilter)\r\n    return duplicatesFilter;\r\n  }\r\n\r\n  prevDuplicates(arr) {\r\n    const counts = arr.reduce(function (counts, item) {\r\n      counts[item] = (counts[item] || 0) + 1;\r\n      return counts;\r\n    }, {});\r\n\r\n    return Object.keys(counts).reduce(function (arr, item) {\r\n      if (counts[item] === 1) {\r\n        arr.push(item);\r\n      }\r\n      return arr;\r\n    }, []);\r\n  }\r\n\r\n  sortByCategory(data, categoryName) {\r\n    console.log({ data, categoryName });\r\n    const arr = [];\r\n    Object.values(data.data).forEach((item) => {\r\n      if (item.tags.includes(categoryName)) {\r\n        return arr.push(item.id);\r\n      } else if (categoryName === 'All') {\r\n        return arr.push(item.id);\r\n      }\r\n    });\r\n\r\n    document.querySelectorAll('.tier-sort').forEach((item) => {\r\n      Object.values(item.children).map((item) => arr.push(item.id));\r\n    });\r\n\r\n    document\r\n      .querySelectorAll('.icon_champ')\r\n      .forEach((item) => arr.push(item.id));\r\n\r\n    return arr;\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/modules_js/GroupByCategory.js?");
+
+/***/ }),
+
+/***/ "./src/modules_js/ImagesUI.js":
+/*!************************************!*\
+  !*** ./src/modules_js/ImagesUI.js ***!
+  \************************************/
+/*! exports provided: ImagesUI */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ImagesUI\", function() { return ImagesUI; });\n/* harmony import */ var _GroupByCategory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GroupByCategory */ \"./src/modules_js/GroupByCategory.js\");\n/* eslint-disable */\r\n\r\n\r\nclass ImagesUI {\r\n  constructor(container, fetchedData) {\r\n    this.filterByCategory = new _GroupByCategory__WEBPACK_IMPORTED_MODULE_0__[\"GroupByCategory\"](fetchedData);\r\n    this.container = container;\r\n    this.width = 80;\r\n    this.height = 80;\r\n  }\r\n\r\n  attachToContainer(container, root) {\r\n    document.querySelector(container).appendChild(root);\r\n  }\r\n\r\n  createImagesByCategory(categoryName = 'Tank') {\r\n    this.filterByCategory.setUpByCategory(categoryName).forEach((item) => {\r\n      const myImage = new Image(this.width, this.height);\r\n      myImage.src = `http://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${item}.png`;\r\n      myImage.id = item;\r\n      myImage.className = 'icon_champ';\r\n      this.attachToContainer(this.container, myImage);\r\n    });\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/modules_js/ImagesUI.js?");
+
+/***/ }),
+
+/***/ "./src/modules_js/ToggleClass.js":
+/*!***************************************!*\
+  !*** ./src/modules_js/ToggleClass.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return ToggleClass; });\nclass ToggleClass {\r\n  constructor(element) {\r\n    this.element = document.querySelector(element);\r\n  }\r\n\r\n  show() {\r\n    this.element.classList.add('active');\r\n    this.element.classList.remove('inactive');\r\n  }\r\n\r\n  hide() {\r\n    this.element.classList.remove('active');\r\n    this.element.classList.add('inactive');\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/modules_js/ToggleClass.js?");
+
+/***/ }),
+
+/***/ "./src/modules_js/fetch.images.js":
+/*!****************************************!*\
+  !*** ./src/modules_js/fetch.images.js ***!
+  \****************************************/
+/*! exports provided: fetchImages */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"fetchImages\", function() { return fetchImages; });\nconst fetchImages = async (url) => {\r\n  const fetchApi = await fetch(url);\r\n  return fetchApi.json();\r\n};\r\n\n\n//# sourceURL=webpack:///./src/modules_js/fetch.images.js?");
 
 /***/ })
 
