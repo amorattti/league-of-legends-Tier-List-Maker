@@ -10,7 +10,6 @@ export class GroupByCategory {
       categoryName
     );
 		const duplicatesFilter = this.prevDuplicates(sortByCategoryData);
-		console.log(duplicatesFilter)
     return duplicatesFilter;
   }
 
@@ -29,7 +28,6 @@ export class GroupByCategory {
   }
 
   sortByCategory(data, categoryName) {
-    console.log({ data, categoryName });
     const arr = [];
     Object.values(data.data).forEach((item) => {
       if (item.tags.includes(categoryName)) {

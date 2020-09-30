@@ -22,6 +22,31 @@ article {
   text-align: center;
 }
 
+.color-select {
+	display: flex;
+	justify-content: center;
+}
+
+.color-select > span {
+	display: block;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+.modalWrapper{
+	display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 8px;
+  background: #ffff;
+  height: 460px;
+  width: 810px;
+  overflow: auto;
+  position: absolute;
+	border-radius: 5px;
+	display: none;
+}
+
 .screenshot-wrapper {
   display: flex;
   flex-direction: column;
@@ -32,10 +57,11 @@ article {
   width: 810px;
   overflow: auto;
   position: absolute;
-  border-radius: 5px;
+	border-radius: 5px;
+	display: none;
 }
 
-.screenshot-container-wrapper {
+.overlay {
   justify-content: center;
   position: fixed;
   top: 0;

@@ -3,27 +3,40 @@ import { ChangeRowPositionUI } from './modules_js/ArrowsUI';
 import { ClickableElementsUI } from './modules_js/ClicableElementsUI';
 import { ClickableElements } from './modules_js/ClicableElements';
 import { Dnd } from './modules_js/DragAndDrop';
+import { SettingsUI } from './modules_js/SettingsUI';
+import { Settings } from './modules_js/Settings';
 
 const dragAndDrop = new Dnd('.tier-champions-container', '.tier-sort');
 const changeArrow = new ChangePositionTools();
-const arrowUI = new ChangeRowPositionUI('.tier-row', '.move_up', '.move_down');
-const clickableElementsUI = new ClickableElementsUI([
+const clickableElements = new ClickableElements();
+const arrowsUI = new ChangeRowPositionUI('.tier-row', '.move_up', '.move_down');
+const buttons = new ClickableElementsUI([
   ['.btn-show', 'click'],
   ['.btn-close', 'click'],
   ['.btn-download', 'click'],
-  ['.screenshot-container-wrapper', 'click'],
-  ['.screenshot-wrapper', 'click'],
   ['#category', 'change'],
+  ['.settings', 'click'],
 ]);
-const clickableElements = new ClickableElements();
+const layoutElements = new ClickableElementsUI([
+  ['.overlay', 'click'],
+  ['.screenshot-wrapper', 'click'],
+]);
+const settingsUI = new SettingsUI('.tier-row', '.settings');
 
 dragAndDrop.dnd();
 
-// it refers to the up arrows and down arrow
-arrowUI.subscribe((selectorName, item) => {
+arrowsUI.subscribe((selectorName, item) => {
   changeArrow.changeTool(selectorName, item);
 });
 
-clickableElementsUI.subscribe((selector, event) => {
-  clickableElements.changeButton(selector, event);
+buttons.subscribe((selector, event) => {
+  clickableElements.changeTool(selector, event);
+});
+
+layoutElements.subscribe((selector, event) => {
+  clickableElements.changeTool(selector, event);
+});
+
+settingsUI.subscribe((element, event, index) => {
+  const settings = new Settings(element, event, index);
 });

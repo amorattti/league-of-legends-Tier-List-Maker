@@ -1,6 +1,7 @@
 export default class ToggleClass {
-  constructor(element) {
+  constructor(element, childElement) {
     this.element = document.querySelector(element);
+    this.child = document.querySelector(childElement);
   }
 
   show() {
@@ -11,5 +12,15 @@ export default class ToggleClass {
   hide() {
     this.element.classList.remove('active');
     this.element.classList.add('inactive');
+  }
+
+  showChild() {
+    this.child.classList.add('active');
+    this.child.classList.remove('inactive');
+  }
+
+  hideChild() {
+    this.child.classList.remove('active');
+    this.child.classList.add('inactive');
   }
 }

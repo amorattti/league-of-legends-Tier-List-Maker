@@ -4,30 +4,33 @@ import { fetchImages } from './fetch.images';
 import { ImagesUI } from './ImagesUI';
 import ToggleClass from './ToggleClass';
 
-const URL = 'http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion.json';
+const URL =
+  'http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion.json';
 
 export class ClickableElements {
   constructor() {
     this.canvasToHtmlClass = new DrawingCanvasUI(
       '.tier-container',
-      '.screenshot-wrapper',
-      '.screenshot-container-wrapper',
+      '.screenshot-wrapper'
     );
-    this.toggleClass = new ToggleClass('.screenshot-container-wrapper');
+    this.toggleClass = new ToggleClass('.overlay', '.screenshot-wrapper');
     this.setCategory(null);
   }
 
   drawCanvasToHtml() {
+    this.toggleClass.show();
+    this.toggleClass.showChild();
     this.canvasToHtmlClass.drawCanvas();
   }
 
   hideWrapper() {
     this.toggleClass.hide();
+    this.toggleClass.hideChild();
   }
 
-  hideWrapperContainer(event) {
-    event.stopPropagation();
+  hideScreenshotWrapperContainer() {
     this.toggleClass.hide();
+    this.toggleClass.hideChild();
   }
 
   screenshotWrapper(event) {
@@ -55,7 +58,7 @@ export class ClickableElements {
     getImages.createImagesByCategory(categoryName);
   }
 
-  changeButton(selector, event) {
+  changeTool(selector, event) {
     switch (selector) {
       case '.btn-show':
         return this.drawCanvasToHtml();
@@ -63,12 +66,13 @@ export class ClickableElements {
         return this.hideWrapper();
       case '.btn-download':
         return this.download();
-      case '.screenshot-container-wrapper':
-        return this.hideWrapperContainer(event);
+      case '.overlay':
+        return this.hideScreenshotWrapperContainer();
       case '.screenshot-wrapper':
         return this.screenshotWrapper(event);
       case '#category':
         return this.setCategory(event);
+
       default:
         return '';
     }

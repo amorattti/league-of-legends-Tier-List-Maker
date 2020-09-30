@@ -1,9 +1,7 @@
 import html2canvas from 'html2canvas';
-import ToggleClass from './ToggleClass';
 
 export class DrawingCanvasUI {
-  constructor(container, screenshotWrapper, screenshotWrapperContainer) {
-    this.toggleCssClass = new ToggleClass(screenshotWrapperContainer);
+  constructor(container, screenshotWrapper) {
     this.container = document.querySelector(container);
     this.screenshotWrapper = document.querySelector(screenshotWrapper);
   }
@@ -17,6 +15,5 @@ export class DrawingCanvasUI {
     canvas.toDataURL('image/jpeg');
     this.screenshotWrapper.removeChild(this.screenshotWrapper.lastChild);
     this.screenshotWrapper.appendChild(canvas);
-    this.toggleCssClass.show();
   }
 }
