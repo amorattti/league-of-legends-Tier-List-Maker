@@ -1,34 +1,26 @@
 import ToggleClass from './ToggleClass';
 
 export class Settings {
-  constructor(row, eventt, indexRow) {
-    this.row = row;
+  constructor() {
     this.toggleClass = new ToggleClass('.overlay', '.modalWrapper');
-    this.modalWrapperElement = document.querySelectorAll('.modalWrapper')[
-      indexRow
-    ];
-    this.show();
-    this.stopPropagation(eventt);
   }
 
-  show() {
+  hideModal() {
+    this.toggleClass.hide();
+    this.toggleClass.hideChild();
+  }
+
+  showModal() {
     this.toggleClass.show();
-		this.toggleClass.showChild();
-		console.log(this.row, 'row')
-  }
-
-  stopPropagation() {
-    if (this.modalWrapperElement) {
-      this.modalWrapperElement.addEventListener('click', (e) => {
-        e.stopPropagation();
-      });
-    }
+    this.toggleClass.showChild();
   }
 
   changeTool(selector) {
     switch (selector) {
+      case '.modal-close':
+        return this.hideModal();
       case '.settings':
-        return this.changeView();
+        return this.showModal();
       default:
         return '';
     }

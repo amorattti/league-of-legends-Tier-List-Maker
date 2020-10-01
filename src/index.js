@@ -22,6 +22,7 @@ const layoutElements = new ClickableElementsUI([
   ['.screenshot-wrapper', 'click'],
 ]);
 const settingsUI = new SettingsUI('.tier-row', '.settings');
+const settingsTools = new Settings();
 
 dragAndDrop.dnd();
 
@@ -37,6 +38,7 @@ layoutElements.subscribe((selector, event) => {
   clickableElements.changeTool(selector, event);
 });
 
-settingsUI.subscribe((element, event, index) => {
-  const settings = new Settings(element, event, index);
+settingsUI.subscribe((element) => {
+  console.log('ss', element);
+  settingsTools.changeTool(element);
 });

@@ -1,21 +1,35 @@
+import ToggleClass from './ToggleClass';
+
 export class SettingsUI {
-  constructor(rowElement, settingsElement) {
-    this.rows = document.querySelectorAll(rowElement);
-    this.settingsElements = document.querySelectorAll(settingsElement);
-    this.createElements();
+  constructor(rows, settingsElement) {
+    this.toggleClass = new ToggleClass('.overlay', '.modalWrapper');
+    this.rows = document.querySelectorAll(rows);
+    this.settingsModal = document.querySelector('.modalWrapper');
+    this.settingsElements = settingsElement;
+    this.createSettingsButtons();
+    this.stopPropagation();
     this.subscribed = [];
   }
 
-  createElements() {
-    this.rows.forEach((row, indexRow) => {
-      this.attachListener(this.settingsElements, row, indexRow);
-    });
+  stopPropagation() {
+    if (this.settingsModal) {
+      this.settingsModal.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    }
   }
 
-  attachListener(settingsElements, row, indexRow) {
-    const settingsElement = settingsElements[indexRow];
-    settingsElement.addEventListener('click', (event) => {
-      this.subscribed.forEach((callback) => callback(row, event, indexRow));
+  createSettingsButtons() {
+    this.rows.forEach((row, indexRow) => {
+      this.createSettingButton(this.settingsElements, row, indexRow);
+    });
+    this.createSettingButton('.modal-close', null, 0);
+  }
+
+  createSettingButton(element, row, indexRow) {
+    const elementButton = document.querySelectorAll(element)[indexRow];
+    elementButton.addEventListener('click', () => {
+      this.subscribed.forEach((callback) => callback(element));
     });
   }
 
