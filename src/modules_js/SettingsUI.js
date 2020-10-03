@@ -29,7 +29,9 @@ export class SettingsUI {
   createSettingButton(element, row, indexRow) {
     const elementButton = document.querySelectorAll(element)[indexRow];
     elementButton.addEventListener('click', () => {
-      this.subscribed.forEach((callback) => callback(element));
+      this.subscribed.forEach((callback) => {
+        callback(element, indexRow, row);
+      });
     });
   }
 

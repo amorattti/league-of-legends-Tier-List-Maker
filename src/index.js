@@ -38,7 +38,6 @@ layoutElements.subscribe((selector, event) => {
   clickableElements.changeTool(selector, event);
 });
 
-settingsUI.subscribe((element) => {
-  console.log('ss', element);
-  settingsTools.changeTool(element);
+settingsUI.subscribe((element, indexRow, row) => {
+  settingsTools.changeButton(element, row);
 });
