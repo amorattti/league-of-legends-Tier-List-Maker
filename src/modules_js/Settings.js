@@ -10,9 +10,23 @@ export class Settings {
   }
 
   setColors(row) {
+    const rowColor = getComputedStyle(row.children[0]).backgroundColor;
+    const current = document.getElementsByClassName('selected');
+
     Object.values(this.colors).forEach((item) => {
-      item.onclick = () =>
-        (row.children[0].style.background = item.style.background);
+      item.onclick = () => {
+        row.children[0].style.background = item.style.background;
+        current[0].className = current[0].className.replace('selected', '');
+        item.className += 'selected';
+      };
+    });
+
+    current[0].className = current[0].className.replace('selected', '');
+
+    Object.values(this.colors).forEach((item) => {
+      if (item.style.background === rowColor) {
+        item.className += 'selected';
+      }
     });
   }
 
@@ -32,7 +46,7 @@ export class Settings {
       case '.modal-close':
         return this.hideModal();
       case '.settings':
-        return this.showModal();
+        return this.showModal(row);
       default:
         return '';
     }

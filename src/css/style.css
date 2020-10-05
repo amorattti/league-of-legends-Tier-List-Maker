@@ -178,23 +178,23 @@ article {
   font-size: 20px;
 }
 
-.tier-row:nth-child(1) .tier-rank {
+.row1 {
   background: rgb(255, 127, 127);
 }
 
-.tier-row:nth-child(2) .tier-rank {
+.row2 {
   background: rgb(255, 191, 127);
 }
 
-.tier-row:nth-child(3) .tier-rank {
+.row3 {
   background: rgb(255, 223, 127);
 }
 
-.tier-row:nth-child(4) .tier-rank {
+.row4 {
   background: rgb(255, 255, 127);
 }
 
-.tier-row:nth-child(5) .tier-rank {
+.row5 {
   background: rgb(191, 255, 127);
 }
 
@@ -207,4 +207,8 @@ article {
 
 .inactive {
   display: none;
+}
+
+.selected {
+	border: 2px solid;
 }
