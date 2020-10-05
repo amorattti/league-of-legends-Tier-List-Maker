@@ -38,6 +38,6 @@ layoutElements.subscribe((selector, event) => {
   clickableElements.changeTool(selector, event);
 });
 
-settingsUI.subscribe((element, indexRow, row) => {
-  settingsTools.changeButton(element, row);
+settingsUI.subscribe((selector, indexRow, row) => {
+  settingsTools.changeButton(selector, row);
 });

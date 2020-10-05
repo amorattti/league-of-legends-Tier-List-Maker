@@ -9,6 +9,19 @@ export class Settings {
     this.color = null;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  handleTextare(row) {
+    const input = document.querySelector('textarea');
+    const rowText = row.children[0].innerText;
+    const valueInput = document.getElementById('nameTier');
+
+    valueInput.value = rowText;
+
+    input.addEventListener('input', (e) => {
+      row.children[0].textContent = e.target.value;
+    });
+  }
+
   setColors(row) {
     const rowColor = getComputedStyle(row.children[0]).backgroundColor;
     const current = document.getElementsByClassName('selected');
@@ -35,18 +48,19 @@ export class Settings {
     this.toggleClass.hideChild();
   }
 
-  showModal() {
+  showModalAndSetListeners(row) {
     this.toggleClass.show();
     this.toggleClass.showChild();
+    this.setColors(row);
+    this.handleTextare(row);
   }
 
   changeButton(selector, row) {
-    this.setColors(row);
     switch (selector) {
       case '.modal-close':
         return this.hideModal();
       case '.settings':
-        return this.showModal(row);
+        return this.showModalAndSetListeners(row);
       default:
         return '';
     }
