@@ -1,6 +1,6 @@
 export class ChangeRowPositionUI {
-  constructor(row, previusElement, nextEmenent) {
-    this.rows = document.querySelectorAll(row);
+  constructor(rowList, previusElement, nextEmenent) {
+    this.rows = rowList;
     this.moveUp = document.querySelectorAll(previusElement);
     this.moveDown = document.querySelectorAll(nextEmenent);
     this.subscribed = [];

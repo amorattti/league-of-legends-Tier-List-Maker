@@ -1,11 +1,12 @@
 import ToggleClass from './ToggleClass';
 
 export class SettingsUI {
-  constructor(rows, settingsElement) {
+  constructor(rows, selectorName) {
     this.toggleClass = new ToggleClass('.overlay', '.modalWrapper');
-    this.rows = document.querySelectorAll(rows);
+    //this.rows = document.querySelectorAll(rows);
+    this.rows = rows;
     this.settingsModal = document.querySelector('.modalWrapper');
-    this.settingsElements = settingsElement;
+    this.settingsElements = selectorName;
     this.createSettingsButtons();
     this.stopPropagation();
     this.subscribed = [];
@@ -23,14 +24,18 @@ export class SettingsUI {
     this.rows.forEach((row, indexRow) => {
       this.createSettingButton(this.settingsElements, row, indexRow);
     });
+
     this.createSettingButton('.modal-close', null, 0);
+    this.createSettingButton('#delete-row', null, 0);
+    this.createSettingButton('#add-row-up', null, 0);
+    this.createSettingButton('#add-row-below', null, 0);
   }
 
   createSettingButton(element, row, indexRow) {
     const elementButton = document.querySelectorAll(element)[indexRow];
     elementButton.addEventListener('click', () => {
       this.subscribed.forEach((callback) => {
-        callback(element, indexRow, row);
+        callback(element, row);
       });
     });
   }

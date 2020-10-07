@@ -1,3 +1,4 @@
+import { SettingsUI } from './SettingsUI';
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-return-assign */
 import ToggleClass from './ToggleClass';
@@ -7,14 +8,17 @@ export class Settings {
     this.toggleClass = new ToggleClass('.overlay', '.modalWrapper');
     this.colors = document.querySelector('.color-select').children;
     this.color = null;
+    this.row = null;
   }
 
   // eslint-disable-next-line class-methods-use-this
   handleTextare(row) {
+    console.log(this.row, 'tjois ');
+    console.log('row z handle text', row);
     const input = document.querySelector('textarea');
     const rowText = row.children[0].innerText;
     const valueInput = document.getElementById('nameTier');
-
+    console.log(valueInput.value);
     valueInput.value = rowText;
 
     input.addEventListener('input', (e) => {
@@ -49,18 +53,61 @@ export class Settings {
   }
 
   showModalAndSetListeners(row) {
+    console.log('row z showModalAndSetListeners', row);
     this.toggleClass.show();
     this.toggleClass.showChild();
     this.setColors(row);
     this.handleTextare(row);
+    this.row = row;
   }
 
-  changeButton(selector, row) {
+  removeRow() {
+    this.row.remove();
+  }
+
+  addRowUp(tierSorts, rowsList) {
+    const colors = [];
+    const containerRow = document.querySelector('.tier-container');
+
+    const cloneRow = this.row.cloneNode(true);
+    cloneRow.children[0].innerText = 'new';
+    cloneRow.children[0].style.background = this.randomColor();
+    cloneRow.children[1].innerHTML = '';
+    containerRow.appendChild(cloneRow);
+    tierSorts.push(cloneRow.children[1]);
+    rowsList.push(cloneRow);
+
+    // re activate event listeners
+    cloneRow.children[2].children[0].onclick = () => {
+      this.showModalAndSetListeners(cloneRow);
+    };
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  addRowDown() {
+    console.log('addRowDown');
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  randomColor() {
+    const colors = ['7FFF7F', '7FFFFF', '7F7FFF', 'FF7FFF', 'BF7FBF'];
+    const index = Math.floor(Math.random() * 5);
+    return colors[index];
+  }
+
+  changeButton(selector, row, tierSorts, rowsList) {
+    console.log('row z butotn settings', row);
     switch (selector) {
       case '.modal-close':
         return this.hideModal();
       case '.settings':
         return this.showModalAndSetListeners(row);
+      case '#delete-row':
+        return this.removeRow();
+      case '#add-row-up':
+        return this.addRowUp(tierSorts, rowsList);
+      case '#add-row-below':
+        return this.addRowDown();
       default:
         return '';
     }
