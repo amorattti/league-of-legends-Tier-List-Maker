@@ -13,17 +13,15 @@ export class Settings {
 
   // eslint-disable-next-line class-methods-use-this
   handleTextare(row) {
-    console.log(this.row, 'tjois ');
-    console.log('row z handle text', row);
     const input = document.querySelector('textarea');
     const rowText = row.children[0].innerText;
     const valueInput = document.getElementById('nameTier');
-    console.log(valueInput.value);
-    valueInput.value = rowText;
 
-    input.addEventListener('input', (e) => {
+    input.onchange = (e) => {
       row.children[0].textContent = e.target.value;
-    });
+    };
+
+    valueInput.value = rowText;
   }
 
   setColors(row) {
@@ -53,12 +51,11 @@ export class Settings {
   }
 
   showModalAndSetListeners(row) {
-    console.log('row z showModalAndSetListeners', row);
     this.toggleClass.show();
     this.toggleClass.showChild();
     this.setColors(row);
-    this.handleTextare(row);
     this.row = row;
+    this.handleTextare(row);
   }
 
   removeRow() {

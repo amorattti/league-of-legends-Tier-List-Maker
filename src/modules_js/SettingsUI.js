@@ -23,6 +23,7 @@ export class SettingsUI {
   createSettingsButtons() {
     this.rows.forEach((row, indexRow) => {
       this.createSettingButton(this.settingsElements, row, indexRow);
+      console.log('createSettingsButtons TEST', row, indexRow);
     });
 
     this.createSettingButton('.modal-close', null, 0);
