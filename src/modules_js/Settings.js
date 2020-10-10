@@ -12,19 +12,18 @@ export class Settings {
   }
 
   handleTextare(row) {
-    const input = document.querySelector('textarea');
-    const rowText = row.children[0].children[0].value;
-    const valueInput = document.getElementById('nameTier');
-		console.log(rowText, 'ss')
-    input.onchange = (e) => {
-      row.children[0].children[0].value = e.target.value;
+    const inputSettings = document.querySelector('textarea');
+    const rowInputText = row.children[0].children[0];
+
+    inputSettings.onchange = (e) => {
+      rowInputText.value = e.target.value;
     };
 
-    valueInput.value = rowText;
+    inputSettings.value = rowInputText.value;
   }
 
   setColors(row) {
-    const rowColor = getComputedStyle(row.children[0]).backgroundColor;
+		const rowColor = getComputedStyle(row.children[0].firstElementChild).backgroundColor;
     const current = document.getElementsByClassName('selected');
 
     Object.values(this.colors).forEach((item) => {
@@ -35,11 +34,12 @@ export class Settings {
       };
     });
 
-    current[0].className = current[0].className.replace('selected', '');
+		current[0].className = current[0].className.replace('selected', '');
 
     Object.values(this.colors).forEach((item) => {
+      console.log(item.style.background);
       if (item.style.background === rowColor) {
-        item.className += 'selected';
+        item.className = 'selected';
       }
     });
   }
@@ -49,14 +49,6 @@ export class Settings {
     this.toggleClass.hideChild();
   }
 
-  showModalAndSetListeners(row) {
-    this.toggleClass.show();
-    this.toggleClass.showChild();
-    this.setColors(row);
-    this.row = row;
-    this.handleTextare(row);
-  }
-
   removeRow() {
     this.row.remove();
   }
@@ -64,7 +56,7 @@ export class Settings {
   createNewRow(tierSortsRow, callback) {
     const cloneRow = this.row.cloneNode(true);
 
-    cloneRow.children[0].innerText = 'new';
+    cloneRow.children[0].children[0].value = 'new';
     cloneRow.children[1].innerHTML = '';
     cloneRow.children[0].style.background = `#${this.randomColor()}`;
 
@@ -115,9 +107,13 @@ export class Settings {
     return colors[index];
   }
 
-	changeText(row) {
-
-	}
+  showModalAndSetListeners(row) {
+    this.toggleClass.show();
+    this.toggleClass.showChild();
+    this.setColors(row);
+    this.row = row;
+    this.handleTextare(row);
+  }
 
   changeButton(selector, row, tierSortsRow) {
     switch (selector) {
@@ -131,8 +127,6 @@ export class Settings {
         return this.addRowUp(tierSortsRow);
       case '#add-row-below':
         return this.addRowDown(tierSortsRow);
-      case '.tier-rank':
-        return this.changeText(row)
       default:
         return '';
     }

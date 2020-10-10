@@ -1,17 +1,16 @@
-/* eslint-disable class-methods-use-this */
+
 import { DrawingCanvasUI } from './DrawingCanvas2Html';
 import { fetchImages } from './fetch.images';
 import { ImagesUI } from './ImagesUI';
 import ToggleClass from './ToggleClass';
 
-const URL =
-  'http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion.json';
+const URL = 'http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion.json';
 
 export class ClickableElements {
   constructor() {
     this.canvasToHtmlClass = new DrawingCanvasUI(
       '.tier-container',
-      '.screenshot-wrapper'
+      '.screenshot-wrapper',
     );
     this.toggleClass = new ToggleClass('.overlay', '.screenshot-wrapper');
     this.setCategory(null);

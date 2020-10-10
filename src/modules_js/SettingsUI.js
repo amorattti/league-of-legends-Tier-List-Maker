@@ -24,7 +24,6 @@ export class SettingsUI {
       this.createSettingButton(this.settingsElements, row, indexRow);
       this.createSettingButton('.tier-rank', row, indexRow);
     });
-
     this.createSettingButton('.modal-close', null, 0);
     this.createSettingButton('#delete-row', null, 0);
     this.createSettingButton('#add-row-up', null, 0);
