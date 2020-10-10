@@ -3,20 +3,17 @@ import { ChangePositionTools } from './modules_js/Settings_Arrows';
 import { ChangeRowPositionUI } from './modules_js/Settings_ArrowsUI';
 import { ClickableElementsUI } from './modules_js/ClicableElementsUI';
 import { ClickableElements } from './modules_js/ClicableElements';
-import { Dnd } from './modules_js/DragAndDrop';
 import { SettingsUI } from './modules_js/SettingsUI';
 import { Settings } from './modules_js/Settings';
 
 const tierSortsRow = [...document.querySelectorAll('.tier-sort')];
 
-const dragAndDrop = new Dnd('.tier-champions-container', '.tier-sort');
 const changeArrow = new ChangePositionTools();
-
 const clickableElements = new ClickableElements();
 const settingsArrowsUI = new ChangeRowPositionUI(
   '.tier-row',
   '.move_up',
-  '.move_down'
+  '.move_down',
 );
 
 const buttons = new ClickableElementsUI([
