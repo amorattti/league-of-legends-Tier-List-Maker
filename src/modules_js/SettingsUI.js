@@ -3,8 +3,7 @@ import ToggleClass from './ToggleClass';
 export class SettingsUI {
   constructor(rows, selectorName) {
     this.toggleClass = new ToggleClass('.overlay', '.modalWrapper');
-    //this.rows = document.querySelectorAll(rows);
-    this.rows = rows;
+    this.rows = document.querySelectorAll(rows);
     this.settingsModal = document.querySelector('.modalWrapper');
     this.settingsElements = selectorName;
     this.createSettingsButtons();
@@ -23,7 +22,7 @@ export class SettingsUI {
   createSettingsButtons() {
     this.rows.forEach((row, indexRow) => {
       this.createSettingButton(this.settingsElements, row, indexRow);
-      console.log('createSettingsButtons TEST', row, indexRow);
+      this.createSettingButton('.tier-rank', row, indexRow);
     });
 
     this.createSettingButton('.modal-close', null, 0);

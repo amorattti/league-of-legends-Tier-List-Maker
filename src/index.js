@@ -7,15 +7,14 @@ import { Dnd } from './modules_js/DragAndDrop';
 import { SettingsUI } from './modules_js/SettingsUI';
 import { Settings } from './modules_js/Settings';
 
-const rowsList = [...document.querySelectorAll('.tier-row')];
-const tierSorts = [...document.querySelectorAll('.tier-sort')];
+const tierSortsRow = [...document.querySelectorAll('.tier-sort')];
 
 const dragAndDrop = new Dnd('.tier-champions-container', '.tier-sort');
 const changeArrow = new ChangePositionTools();
 
 const clickableElements = new ClickableElements();
 const settingsArrowsUI = new ChangeRowPositionUI(
-  rowsList,
+  '.tier-row',
   '.move_up',
   '.move_down'
 );
@@ -31,7 +30,7 @@ const layoutElements = new ClickableElementsUI([
   ['.overlay', 'click'],
   ['.screenshot-wrapper', 'click'],
 ]);
-const settingsUI = new SettingsUI(rowsList, '.settings');
+const settingsUI = new SettingsUI('.tier-row', '.settings');
 const settingsTools = new Settings();
 
 buttons.subscribe((selector, event) => {
@@ -47,8 +46,8 @@ settingsArrowsUI.subscribe((selectorName, item) => {
 });
 
 settingsUI.subscribe((selector, row) => {
-  settingsTools.changeButton(selector, row, tierSorts, rowsList);
+  settingsTools.changeButton(selector, row, tierSortsRow);
 });
 
-const drake = dragula(tierSorts);
+const drake = dragula(tierSortsRow);
 drake.containers.push(document.querySelector('.tier-champions-container'));

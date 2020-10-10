@@ -3,13 +3,13 @@ export class ChangePositionTools {
   moveUp(item) {
     if (item.previousElementSibling) {
       item.after(item.previousElementSibling);
-		}
+    }
   }
 
   moveDown(item) {
     if (item.nextElementSibling) {
       item.before(item.nextElementSibling);
-		}
+    }
   }
 
   changeTool(selectorName, item) {

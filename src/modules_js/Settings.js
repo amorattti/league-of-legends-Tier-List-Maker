@@ -1,24 +1,23 @@
-import { SettingsUI } from './SettingsUI';
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-return-assign */
+import { ChangePositionTools } from './Settings_Arrows';
 import ToggleClass from './ToggleClass';
-
+/* eslint-disable */
 export class Settings {
   constructor() {
     this.toggleClass = new ToggleClass('.overlay', '.modalWrapper');
+    this.changePositionTools = new ChangePositionTools();
     this.colors = document.querySelector('.color-select').children;
+    this.rowsContainer = document.querySelector('.tier-container');
     this.color = null;
     this.row = null;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   handleTextare(row) {
     const input = document.querySelector('textarea');
-    const rowText = row.children[0].innerText;
+    const rowText = row.children[0].children[0].value;
     const valueInput = document.getElementById('nameTier');
-
+		console.log(rowText, 'ss')
     input.onchange = (e) => {
-      row.children[0].textContent = e.target.value;
+      row.children[0].children[0].value = e.target.value;
     };
 
     valueInput.value = rowText;
@@ -30,7 +29,7 @@ export class Settings {
 
     Object.values(this.colors).forEach((item) => {
       item.onclick = () => {
-        row.children[0].style.background = item.style.background;
+        row.children[0].children[0].style.background = item.style.background;
         current[0].className = current[0].className.replace('selected', '');
         item.className += 'selected';
       };
@@ -62,38 +61,65 @@ export class Settings {
     this.row.remove();
   }
 
-  addRowUp(tierSorts, rowsList) {
-    const colors = [];
-    const containerRow = document.querySelector('.tier-container');
-
+  createNewRow(tierSortsRow, callback) {
     const cloneRow = this.row.cloneNode(true);
+
     cloneRow.children[0].innerText = 'new';
-    cloneRow.children[0].style.background = this.randomColor();
     cloneRow.children[1].innerHTML = '';
-    containerRow.appendChild(cloneRow);
-    tierSorts.push(cloneRow.children[1]);
-    rowsList.push(cloneRow);
+    cloneRow.children[0].style.background = `#${this.randomColor()}`;
 
     // re activate event listeners
     cloneRow.children[2].children[0].onclick = () => {
       this.showModalAndSetListeners(cloneRow);
     };
+    cloneRow.children[2].children[1].children[0].onclick = () => {
+      this.changePositionTools.moveUp(cloneRow);
+    };
+    cloneRow.children[2].children[1].children[1].onclick = () => {
+      this.changePositionTools.moveDown(cloneRow);
+    };
+
+    tierSortsRow.push(cloneRow.children[1]);
+    callback(cloneRow);
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  addRowDown() {
-    console.log('addRowDown');
+  addRowDown(tierSortsRow) {
+    this.createNewRow(tierSortsRow, (cloneRow) => {
+      this.insertAfter(cloneRow, this.row);
+    });
   }
 
-  // eslint-disable-next-line class-methods-use-this
+  addRowUp(tierSortsRow) {
+    this.createNewRow(tierSortsRow, (cloneRow) => {
+      this.rowsContainer.insertBefore(cloneRow, this.row);
+    });
+  }
+
+  insertAfter(newNode, existingNode) {
+    existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+  }
+
   randomColor() {
-    const colors = ['7FFF7F', '7FFFFF', '7F7FFF', 'FF7FFF', 'BF7FBF'];
+    const colors = [
+      '7FFF7F',
+      '7FFFFF',
+      '7F7FFF',
+      'FF7FFF',
+      'BF7FBF',
+      '3B3B3B',
+      '858585',
+      'CFCFCF',
+      'F7F7F7',
+    ];
     const index = Math.floor(Math.random() * 5);
     return colors[index];
   }
 
-  changeButton(selector, row, tierSorts, rowsList) {
-    console.log('row z butotn settings', row);
+	changeText(row) {
+
+	}
+
+  changeButton(selector, row, tierSortsRow) {
     switch (selector) {
       case '.modal-close':
         return this.hideModal();
@@ -102,9 +128,11 @@ export class Settings {
       case '#delete-row':
         return this.removeRow();
       case '#add-row-up':
-        return this.addRowUp(tierSorts, rowsList);
+        return this.addRowUp(tierSortsRow);
       case '#add-row-below':
-        return this.addRowDown();
+        return this.addRowDown(tierSortsRow);
+      case '.tier-rank':
+        return this.changeText(row)
       default:
         return '';
     }

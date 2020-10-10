@@ -111,6 +111,13 @@ article {
   flex: 1;
 }
 
+.tier-rank > input{
+	height: 99%;
+	text-align: center;
+	width: 100%;
+	border: none;
+}
+
 .tier-sort {
   flex: 10
 }
@@ -178,23 +185,23 @@ article {
   font-size: 20px;
 }
 
-.row1 {
+.row1 > input {
   background: rgb(255, 127, 127);
 }
 
-.row2 {
+.row2 > input {
   background: rgb(255, 191, 127);
 }
 
-.row3 {
+.row3 > input {
   background: rgb(255, 223, 127);
 }
 
-.row4 {
+.row4 > input {
   background: rgb(255, 255, 127);
 }
 
-.row5 {
+.row5 > input {
   background: rgb(191, 255, 127);
 }
 
