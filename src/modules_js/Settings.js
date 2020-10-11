@@ -12,22 +12,22 @@ export class Settings {
   }
 
   handleTextare(row) {
-    const inputSettings = document.querySelector('textarea');
-    const rowInputText = row.children[0].children[0];
-
+    const inputSettings = document.querySelector('#text_settings');
+    const rowInputText = row.children[0].firstElementChild;
+		console.log(rowInputText)
     inputSettings.onchange = (e) => {
-      rowInputText.value = e.target.value;
+      rowInputText.innerText = e.target.value;
     };
-    inputSettings.value = rowInputText.value;
+    inputSettings.value = rowInputText.innerText;
   }
 
   setColors(row) {
-		const rowColor = getComputedStyle(row.children[0].firstElementChild).backgroundColor;
+		const rowColor = getComputedStyle(row.children[0]).backgroundColor;
     const current = document.getElementsByClassName('selected');
 
     Object.values(this.colors).forEach((item) => {
       item.onclick = () => {
-        row.children[0].firstElementChild.style.background = item.style.background;
+        row.children[0].style.background = item.style.background;
         current[0].className = current[0].className.replace('selected', '');
         item.className += 'selected';
       };
@@ -36,7 +36,6 @@ export class Settings {
 		current[0].className = current[0].className.replace('selected', '');
 
     Object.values(this.colors).forEach((item) => {
-      console.log(item.style.background);
       if (item.style.background === rowColor) {
         item.className = 'selected';
       }
@@ -55,9 +54,9 @@ export class Settings {
   createNewRow(tierSortsRow, callback) {
     const cloneRow = this.row.cloneNode(true);
 
-    cloneRow.children[0].firstElementChild.value = 'new';
+    cloneRow.children[0].firstElementChild.innerText = 'new';
     cloneRow.children[1].innerHTML = '';
-    cloneRow.children[0].firstElementChild.style.background = `#${this.randomColor()}`;
+    cloneRow.children[0].style.background = `#${this.randomColor()}`;
 
     // re activate event listeners
     cloneRow.children[2].children[0].onclick = () => {
@@ -108,10 +107,11 @@ export class Settings {
 
   showModalAndSetListeners(row) {
     this.toggleClass.show();
-    this.toggleClass.showChild();
+		this.toggleClass.showChild();
+		this.handleTextare(row);
     this.setColors(row);
     this.row = row;
-    this.handleTextare(row);
+    
   }
 
   changeButton(selector, row, tierSortsRow) {
