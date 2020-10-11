@@ -1,4 +1,3 @@
-import dragula from 'dragula';
 import { ChangePositionTools } from './modules_js/Settings_Arrows';
 import { ChangeRowPositionUI } from './modules_js/Settings_ArrowsUI';
 import { ClickableElementsUI } from './modules_js/ClicableElementsUI';
