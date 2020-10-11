@@ -22,7 +22,7 @@ export class Settings {
   }
 
   setColors(row) {
-		const rowColor = getComputedStyle(row.children[0]).backgroundColor;
+    const rowColor = getComputedStyle(row.children[0]).backgroundColor;
     const current = document.getElementsByClassName('selected');
 
     Object.values(this.colors).forEach((item) => {
@@ -33,7 +33,7 @@ export class Settings {
       };
     });
 
-		current[0].className = current[0].className.replace('selected', '');
+    current[0].className = current[0].className.replace('selected', '');
 
     Object.values(this.colors).forEach((item) => {
       if (item.style.background === rowColor) {
@@ -54,7 +54,7 @@ export class Settings {
   createNewRow(tierSortsRow, callback) {
     const cloneRow = this.row.cloneNode(true);
 
-    cloneRow.children[0].firstElementChild.innerText = 'new';
+    cloneRow.children[0].firstElementChild.innerText = 'NEW';
     cloneRow.children[1].innerHTML = '';
     cloneRow.children[0].style.background = `#${this.randomColor()}`;
 
@@ -89,9 +89,9 @@ export class Settings {
     existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
   }
 
-	clearRow() {
-		this.row.children[1].innerHTML = '';
-	}
+  clearRow() {
+    this.row.children[1].innerHTML = '';
+  }
 
   randomColor() {
     const colors = [
@@ -111,12 +111,11 @@ export class Settings {
 
   showModalAndSetListeners(row) {
     this.toggleClass.show();
-		this.toggleClass.showChild();
-		this.handleTextare(row);
+    this.toggleClass.showChild();
+    this.handleTextare(row);
     this.setColors(row);
-    this.row = row;    
-	}
-	
+    this.row = row;
+  }
 
   changeButton(selector, row, tierSortsRow) {
     switch (selector) {

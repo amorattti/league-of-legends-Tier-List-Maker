@@ -8,13 +8,14 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="node_modules/dragula/dist/dragula.css" type="text/css">
 	<link rel="stylesheet" href="./src/css/style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 	<title>Document</title>
 </head>
 
 <body>
 	<article>
 		<h1>League Of Legends Champions 2020 Tier List Maker</h1>
-		<button class="btn-show">Show / Download</button>
+		<button class="btn-show">Show and Download</button>
 		<section class="tier-container" id="capture">
 			<div class="tier-row">
 				<div contenteditable="true" class="tier-rank row1">
@@ -128,7 +129,7 @@
 		<div class="overlay">
 			<div class="modalWrapper">
 				<span class="modal-close">&#10005;</span>
-				<p>Choose a Label Background Color:</p>
+				<h5>Choose a Label Background Color:</h5>
 				<div class="color-select">
 					<span style="background:#FF7F7F" class=""></span>
 					<span style="background:#FFBF7F" class=""></span>
@@ -146,10 +147,8 @@
 					<span style="background:#CFCFCF" class=""></span>
 					<span style="background:#F7F7F7" class=""></span>
 				</div>
-				<p>
-					<strong>Label Text:</strong>
-				</p>
-				<textarea name="text" id="text_settings" cols="50" rows="3"></textarea>
+				<h5> Label Text: </h5>
+				<textarea name="text" id="text_settings" cols="80" rows="2"></textarea>
 				<div class="btn-settings-container">
 					<button id="delete-row">Delete Row</button>
 					<button id="clear-row">Clear Row Images</button>
