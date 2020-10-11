@@ -14,7 +14,7 @@ export class Settings {
   handleTextare(row) {
     const inputSettings = document.querySelector('#text_settings');
     const rowInputText = row.children[0].firstElementChild;
-		console.log(rowInputText)
+
     inputSettings.onchange = (e) => {
       rowInputText.innerText = e.target.value;
     };
@@ -89,6 +89,10 @@ export class Settings {
     existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
   }
 
+	clearRow() {
+		this.row.children[1].innerHTML = '';
+	}
+
   randomColor() {
     const colors = [
       '7FFF7F',
@@ -110,9 +114,9 @@ export class Settings {
 		this.toggleClass.showChild();
 		this.handleTextare(row);
     this.setColors(row);
-    this.row = row;
-    
-  }
+    this.row = row;    
+	}
+	
 
   changeButton(selector, row, tierSortsRow) {
     switch (selector) {
@@ -126,6 +130,8 @@ export class Settings {
         return this.addRowUp(tierSortsRow);
       case '#add-row-below':
         return this.addRowDown(tierSortsRow);
+      case '#clear-row':
+        return this.clearRow();
       default:
         return '';
     }

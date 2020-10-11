@@ -28,6 +28,7 @@ export class SettingsUI {
     this.createSettingButton('#delete-row', null, 0);
     this.createSettingButton('#add-row-up', null, 0);
     this.createSettingButton('#add-row-below', null, 0);
+    this.createSettingButton('#clear-row', null, 0);
   }
 
   createSettingButton(element, row, indexRow) {
