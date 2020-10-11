@@ -97,10 +97,6 @@ article {
 	font-size: 19px;
 }
 
-.settings>i:hover {
-	background-color: grey;
-}
-
 .screenshot-wrapper {
 	display: flex;
 	flex-direction: column;
