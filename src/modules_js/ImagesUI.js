@@ -16,7 +16,7 @@ export class ImagesUI {
   createImagesByCategory(categoryName = 'Tank') {
     this.filterByCategory.setUpByCategory(categoryName).forEach((item) => {
       const myImage = new Image(this.width, this.height);
-      myImage.src = `http://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${item}.png`;
+      myImage.src = `http://ddragon.leagueoflegends.com/cdn/10.20.1/img/champion/${item}.png`;
       myImage.id = item;
       myImage.className = 'icon_champ';
       this.attachToContainer(this.container, myImage);

@@ -1,5 +1,7 @@
 # LoL Tier Champs Tier List Maker
 
+
+
 ![LOL](https://i.imgur.com/rzdLHCC.jpg)
 
 ## Getting Started
@@ -20,6 +22,10 @@ Builds the app for production to the `dist` folder.<br>
 ### `npm run dev`
 
 Run webpack development mode and watch
+
+## Data & Assets
+
+https://developer.riotgames.com/docs/lol#data-dragon_data-assets
 
 ## Built With
 
