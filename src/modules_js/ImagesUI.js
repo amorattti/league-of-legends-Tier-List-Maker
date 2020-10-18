@@ -4,6 +4,7 @@ import { GroupByCategory } from './GroupByCategory';
 export class ImagesUI {
   constructor(container, fetchedData) {
     this.filterByCategory = new GroupByCategory(fetchedData);
+    this.version = '10.21.1';
     this.container = container;
     this.width = 80;
     this.height = 80;
@@ -16,7 +17,7 @@ export class ImagesUI {
   createImagesByCategory(categoryName = 'Tank') {
     this.filterByCategory.setUpByCategory(categoryName).forEach((item) => {
       const myImage = new Image(this.width, this.height);
-      myImage.src = `http://ddragon.leagueoflegends.com/cdn/10.20.1/img/champion/${item}.png`;
+      myImage.src = `http://ddragon.leagueoflegends.com/cdn/${this.version}/img/champion/${item}.png`;
       myImage.id = item;
       myImage.className = 'icon_champ';
       this.attachToContainer(this.container, myImage);
