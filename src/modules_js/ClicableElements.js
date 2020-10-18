@@ -4,7 +4,7 @@ import { ImagesUI } from './ImagesUI';
 import ToggleClass from './ToggleClass';
 
 const URL =
-  'http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion.json';
+  'http://ddragon.leagueoflegends.com/cdn/10.21.1/data/en_US/champion.json';
 
 export class ClickableElements {
   constructor() {
