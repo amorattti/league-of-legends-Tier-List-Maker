@@ -3,18 +3,17 @@ import { fetchImages } from './fetch.images';
 import { ImagesUI } from './ImagesUI';
 import ToggleClass from './ToggleClass';
 
-const URL =
-  'http://ddragon.leagueoflegends.com/cdn/10.21.1/data/en_US/champion.json';
-
 export class ClickableElements {
-  constructor() {
+  constructor(version) {
+    this.version = version;
+    this.URL = `http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`;
     this.canvasToHtmlClass = new DrawingCanvasUI(
       '.tier-container',
-      '.screenshot-wrapper'
+      '.screenshot-wrapper',
     );
     this.toggleClass = new ToggleClass('.overlay', '.screenshot-wrapper');
     this.championsContainer = document.querySelector(
-      '.tier-champions-container'
+      '.tier-champions-container',
     );
     this.canvasElem = document.getElementsByTagName('canvas');
     this.setCategory(null);
@@ -57,8 +56,8 @@ export class ClickableElements {
       categoryName = 'All';
     }
     this.championsContainer.innerHTML = '';
-    const fetchedData = await fetchImages(URL);
-    const getImages = new ImagesUI('.tier-champions-container', fetchedData);
+    const fetchedData = await fetchImages(this.URL);
+    const getImages = new ImagesUI('.tier-champions-container', fetchedData, this.version);
     getImages.createImagesByCategory(categoryName);
   }
 

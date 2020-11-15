@@ -2,9 +2,9 @@
 import { GroupByCategory } from './GroupByCategory';
 
 export class ImagesUI {
-  constructor(container, fetchedData) {
+  constructor(container, fetchedData, version) {
     this.filterByCategory = new GroupByCategory(fetchedData);
-    this.version = '10.21.1';
+    this.version = version;
     this.container = container;
     this.width = 80;
     this.height = 80;
