@@ -1,6 +1,9 @@
 body {
   background: #ffffff;
   font-family: 'Lato', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(30deg, #ddd9d4 30%, #2d4f64);
 }
 
 h1 {
