@@ -1,6 +1,6 @@
 # LoL Tier Champs Tier List Maker
 
-![sd](https://i.ibb.co/g9Rv5Hd/Tier.png)
+![sd](https://i.ibb.co/85bMpQt/tier-Maker.png)
 
 
 ## Getting Started
