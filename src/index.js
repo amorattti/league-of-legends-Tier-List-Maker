@@ -59,3 +59,7 @@ import { fetchImages as fetchVersion } from './modules_js/fetch.images';
   const drake = dragula(tierSortsRow);
   drake.containers.push(document.querySelector('.tier-champions-container'));
 })();
+
+
+
+
