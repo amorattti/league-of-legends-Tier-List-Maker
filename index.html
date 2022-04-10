@@ -1,188 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="upgrade-insecure-requests"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="FaviconIcon" href="favicon.ico" type="image/x-icon" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/dragula@3.7.3/dist/dragula.min.css"
-    />
-    <link rel="stylesheet" href="./src/css/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
-      rel="stylesheet"
-    />
-    <title>Document</title>
-  </head>
 
-  <body>
-    <article>
-      <h1>league of legends Champions tier list maker</h1>
-      <span class="btn-show button">Show and Download</span>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="FaviconIcon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/dragula@3.7.3/dist/dragula.min.css" />
+  <link rel="stylesheet" href="./src/css/style.css" />
 
-    </div>  
-  
-      <section class="tier-container" id="capture">
-        <div class="tier-row">
-          <div contenteditable="true" class="tier-rank row1">
-            <span>S</span>
-          </div>
-          <div class="tier-sort"></div>
-          <div data-html2canvas-ignore class="tier-config">
-            <div class="btn settings">
-              <i class="fa fa-cog" aria-hidden="true"></i>
-            </div>
-            <div>
-              <div class="btn move_up">
-                <i class="fa fa-chevron-up" aria-hidden="true"></i>
-              </div>
-              <div class="btn move_down">
-                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="tier-row">
-          <div contenteditable="true" class="tier-rank row2">
-            <span>A</span>
-          </div>
-          <div class="tier-sort"></div>
-          <div data-html2canvas-ignore class="tier-config">
-            <div class="btn settings">
-              <i class="fa fa-cog" aria-hidden="true"></i>
-            </div>
-            <div>
-              <div class="btn move_up">
-                <i class="fa fa-chevron-up" aria-hidden="true"></i>
-              </div>
-              <div class="btn move_down">
-                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="tier-row">
-          <div contenteditable="true" class="tier-rank row3">
-            <span>B</span>
-          </div>
-          <div class="tier-sort"></div>
-          <div data-html2canvas-ignore class="tier-config">
-            <div class="btn settings">
-              <i class="fa fa-cog" aria-hidden="true"></i>
-            </div>
-            <div>
-              <div class="btn move_up">
-                <i class="fa fa-chevron-up" aria-hidden="true"></i>
-              </div>
-              <div class="btn move_down">
-                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="tier-row">
-          <div contenteditable="true" class="tier-rank row4">
-            <span>C</span>
-          </div>
-          <div class="tier-sort"></div>
-          <div data-html2canvas-ignore class="tier-config">
-            <div class="btn settings">
-              <i class="fa fa-cog" aria-hidden="true"></i>
-            </div>
-            <div>
-              <div class="btn move_up">
-                <i class="fa fa-chevron-up" aria-hidden="true"></i>
-              </div>
-              <div class="btn move_down">
-                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="tier-row">
-          <div contenteditable="true" class="tier-rank row5">
-            <span>D</span>
-          </div>
-          <div class="tier-sort"></div>
-          <div data-html2canvas-ignore class="tier-config">
-            <div class="btn settings">
-              <i class="fa fa-cog" aria-hidden="true"></i>
-            </div>
-            <div>
-              <div class="btn move_up">
-                <i class="fa fa-chevron-up" aria-hidden="true"></i>
-              </div>
-              <div class="btn move_down">
-                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <label for="cars">Choose a champion category:</label>
-      
-      <select  name="category" id="category">
-        <option value="All" selected>All</option>
-        <option value="Fighter">Fighter</option>
-        <option value="Mage">Mage</option>
-        <option value="Assassin">Assassin</option>
-        <option value="Tank">Tank</option>
-        <option value="Marksman">Marksman</option>
-        <option value="Support">Support</option>
-      </select>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap"
+    rel="stylesheet">
+  <title>Document</title>
+</head>
 
-      <section class="tier-champions-container"></section>
-      <div class="overlay">
-        <div class="modalWrapper">
-          <span class="modal-close">&#10005;</span>
-          <h5>Choose a Label Background Color:</h5>
-          <div class="color-select">
-            <span style="background: #ff7f7f" class=""></span>
-            <span style="background: #ffbf7f" class=""></span>
-            <span style="background: #ffdf7f" class="selected"></span>
-            <span style="background: #ffff7f" class=""></span>
-            <span style="background: #bfff7f" class=""></span>
-            <span style="background: #7fff7f" class=""></span>
-            <span style="background: #7fffff" class=""></span>
-            <span style="background: #7fbfff" class=""></span>
-            <span style="background: #7f7fff" class=""></span>
-            <span style="background: #ff7fff" class=""></span>
-            <span style="background: #bf7fbf" class=""></span>
-            <span style="background: #3b3b3b" class=""></span>
-            <span style="background: #858585" class=""></span>
-            <span style="background: #cfcfcf" class=""></span>
-            <span style="background: #f7f7f7" class=""></span>
-          </div>
-          <h5>Label Text:</h5>
-          <textarea
-            name="text"
-            id="text_settings"
-            cols="80"
-            rows="2"
-          ></textarea>
-          <div class="btn-settings-container">
-            <button id="delete-row">Delete Row</button>
-            <button id="clear-row">Clear Row Images</button>
-            <button id="add-row-up">Add a Row Above</button>
-            <button id="add-row-below">Add a Row Below</button>
-          </div>
+<body>
+  <article>
+    <h1>league of legends Champions tier list maker</h1>
+    <span class="btn-show button">Show and Download</span>
+
+    </div>
+
+    <section class="tier-container" id="capture">
+      <div class="tier-row">
+        <div contenteditable="true" class="tier-rank row1">
+          <span>S</span>
         </div>
-        <div class="screenshot-wrapper">
-          <span class="btn-close">&#10005;</span>
-          <button class="btn-download">Download Image</button>
+        <div class="tier-sort"></div>
+        <div data-html2canvas-ignore class="tier-config">
+          <div class="btn settings">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+          </div>
+          <div>
+            <div class="btn move_up">
+              <i class="fa fa-chevron-up" aria-hidden="true"></i>
+            </div>
+            <div class="btn move_down">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </div>
+          </div>
         </div>
       </div>
-    </article>
-  </body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js"></script>
-  <script src="./dist/main.js"></script>
+      <div class="tier-row">
+        <div contenteditable="true" class="tier-rank row2">
+          <span>A</span>
+        </div>
+        <div class="tier-sort"></div>
+        <div data-html2canvas-ignore class="tier-config">
+          <div class="btn settings">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+          </div>
+          <div>
+            <div class="btn move_up">
+              <i class="fa fa-chevron-up" aria-hidden="true"></i>
+            </div>
+            <div class="btn move_down">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tier-row">
+        <div contenteditable="true" class="tier-rank row3">
+          <span>B</span>
+        </div>
+        <div class="tier-sort"></div>
+        <div data-html2canvas-ignore class="tier-config">
+          <div class="btn settings">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+          </div>
+          <div>
+            <div class="btn move_up">
+              <i class="fa fa-chevron-up" aria-hidden="true"></i>
+            </div>
+            <div class="btn move_down">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tier-row">
+        <div contenteditable="true" class="tier-rank row4">
+          <span>C</span>
+        </div>
+        <div class="tier-sort"></div>
+        <div data-html2canvas-ignore class="tier-config">
+          <div class="btn settings">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+          </div>
+          <div>
+            <div class="btn move_up">
+              <i class="fa fa-chevron-up" aria-hidden="true"></i>
+            </div>
+            <div class="btn move_down">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tier-row">
+        <div contenteditable="true" class="tier-rank row5">
+          <span>D</span>
+        </div>
+        <div class="tier-sort"></div>
+        <div data-html2canvas-ignore class="tier-config">
+          <div class="btn settings">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+          </div>
+          <div>
+            <div class="btn move_up">
+              <i class="fa fa-chevron-up" aria-hidden="true"></i>
+            </div>
+            <div class="btn move_down">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <label for="cars">Choose a champion category:</label>
+
+    <select name="category" id="category">
+      <option value="All" selected>All</option>
+      <option value="Fighter">Fighter</option>
+      <option value="Mage">Mage</option>
+      <option value="Assassin">Assassin</option>
+      <option value="Tank">Tank</option>
+      <option value="Marksman">Marksman</option>
+      <option value="Support">Support</option>
+    </select>
+
+    <section class="tier-champions-container"></section>
+    <div class="overlay">
+      <div class="modalWrapper">
+        <span class="modal-close">&#10005;</span>
+        <h5>Choose a Label Background Color:</h5>
+        <div class="color-select">
+          <span style="background: #ff7f7f" class=""></span>
+          <span style="background: #ffbf7f" class=""></span>
+          <span style="background: #ffdf7f" class="selected"></span>
+          <span style="background: #ffff7f" class=""></span>
+          <span style="background: #bfff7f" class=""></span>
+          <span style="background: #7fff7f" class=""></span>
+          <span style="background: #7fffff" class=""></span>
+          <span style="background: #7fbfff" class=""></span>
+          <span style="background: #7f7fff" class=""></span>
+          <span style="background: #ff7fff" class=""></span>
+          <span style="background: #bf7fbf" class=""></span>
+          <span style="background: #3b3b3b" class=""></span>
+          <span style="background: #858585" class=""></span>
+          <span style="background: #cfcfcf" class=""></span>
+          <span style="background: #f7f7f7" class=""></span>
+        </div>
+        <h5>Label Text:</h5>
+        <textarea name="text" id="text_settings" cols="80" rows="2"></textarea>
+        <div class="btn-settings-container">
+          <button id="delete-row">Delete Row</button>
+          <button id="clear-row">Clear Row Images</button>
+          <button id="add-row-up">Add a Row Above</button>
+          <button id="add-row-below">Add a Row Below</button>
+        </div>
+      </div>
+      <div class="screenshot-wrapper">
+        <span class="btn-close">&#10005;</span>
+        <button class="btn-download">Download Image</button>
+      </div>
+    </div>
+  </article>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js"></script>
+<script src="./dist/main.js"></script>
+
 </html>
